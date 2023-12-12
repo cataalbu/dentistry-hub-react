@@ -8,7 +8,7 @@ export default function LoginPage() {
   return (
     <>
       <Helmet>
-        <title> Login | Dentistry Hub </title>
+        <title> Login | DentaFun </title>
       </Helmet>
 
       <LoginView />

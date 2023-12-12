@@ -8,7 +8,7 @@ export default function AppPage() {
   return (
     <>
       <Helmet>
-        <title> Dentistry Hub </title>
+        <title> DentaFun </title>
       </Helmet>
 
       <AppView />

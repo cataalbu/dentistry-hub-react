@@ -8,7 +8,7 @@ export default function UserPage() {
   return (
     <>
       <Helmet>
-        <title> User | Dentistry Hub </title>
+        <title> User | DentaFun </title>
       </Helmet>
 
       <UserView />

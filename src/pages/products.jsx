@@ -8,7 +8,7 @@ export default function ProductsPage() {
   return (
     <>
       <Helmet>
-        <title> Products | Dentistry Hub </title>
+        <title> Products | DentaFun </title>
       </Helmet>
 
       <ProductsView />

@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -10,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
 import { account } from 'src/_mock/account';
+import { logout } from 'src/redux/user/userSlice';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +35,9 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
@@ -40,6 +46,23 @@ export default function AccountPopover() {
   const handleClose = () => {
     setOpen(null);
   };
+
+  const handleLogout = useCallback(async () => {
+    try {
+      await dispatch(logout());
+      navigate('/login', { replace: true });
+      setOpen(null);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, navigate]);
+
+  useEffect(() => {
+    if (!user?.user?.user) {
+      dispatch(logout());
+      navigate('/login', { replace: true });
+    }
+  }, [user, navigate, dispatch]);
 
   return (
     <>
@@ -105,7 +128,7 @@ export default function AccountPopover() {
         <MenuItem
           disableRipple
           disableTouchRipple
-          onClick={handleClose}
+          onClick={handleLogout}
           sx={{ typography: 'body2', color: 'error.main', py: 1.5 }}
         >
           Logout

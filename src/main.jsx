@@ -5,18 +5,18 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import App from './App';
-import store from './redux/store';
+import { store } from './redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <HelmetProvider>
     <BrowserRouter>
-      <Suspense>
-        <Provider store={store}>
+      <Provider store={store}>
+        <Suspense>
           <App />
-        </Provider>
-      </Suspense>
+        </Suspense>
+      </Provider>
     </BrowserRouter>
   </HelmetProvider>
 );

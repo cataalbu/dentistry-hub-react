@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const loginUser = createAsyncThunk('user/loginUser', async (data, thunkAPI) => {
-  const response = await fetch('http://localhost:3001/api/login', {
+  const response = await fetch('http://localhost:1337/api/auth/local', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -10,16 +10,29 @@ export const loginUser = createAsyncThunk('user/loginUser', async (data, thunkAP
     credentials: 'include',
   });
   const userData = await response.json();
-  return userData;
-  //   return thunkAPI.rejectWithValue(json.message);
+  if (response.ok) {
+    localStorage.setItem('user', JSON.stringify(userData));
+    return userData;
+  }
+  return thunkAPI.rejectWithValue(userData.message);
 });
+const userInfoFromStorage = localStorage.getItem('user')
+  ? JSON.parse(localStorage.getItem('user'))
+  : null;
 
-const initialState = {};
+const initialState = {
+  user: userInfoFromStorage,
+};
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.user = null;
+      localStorage.removeItem('user');
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state, action) => {
@@ -37,5 +50,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { login } = userSlice.actions;
+export const { logout } = userSlice.actions;
 export default userSlice.reducer;
