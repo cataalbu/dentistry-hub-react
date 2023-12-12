@@ -8,7 +8,7 @@ export default function BlogPage() {
   return (
     <>
       <Helmet>
-        <title> Blog | Minimal UI </title>
+        <title> Blog | Dentistry Hub </title>
       </Helmet>
 
       <BlogView />
