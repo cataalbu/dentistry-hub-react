@@ -55,8 +55,7 @@ export default function Nav({ openNav, onCloseNav }) {
       <Avatar src={account.photoURL} alt="photoURL" />
 
       <Box sx={{ ml: 2 }}>
-        <Typography variant="subtitle2">{user.user.username}</Typography>
-
+        {user && <Typography variant="subtitle2">{user.user.username}</Typography>}
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {account.role}
         </Typography>
@@ -94,37 +93,41 @@ export default function Nav({ openNav, onCloseNav }) {
   );
 
   return (
-    <Box
-      sx={{
-        flexShrink: { lg: 0 },
-        width: { lg: NAV.WIDTH },
-      }}
-    >
-      {upLg ? (
+    <>
+      {user ? (
         <Box
           sx={{
-            height: 1,
-            position: 'fixed',
-            width: NAV.WIDTH,
-            borderRight: (theme) => `dashed 1px ${theme.palette.divider}`,
+            flexShrink: { lg: 0 },
+            width: { lg: NAV.WIDTH },
           }}
         >
-          {renderContent}
+          {upLg ? (
+            <Box
+              sx={{
+                height: 1,
+                position: 'fixed',
+                width: NAV.WIDTH,
+                borderRight: (theme) => `dashed 1px ${theme.palette.divider}`,
+              }}
+            >
+              {renderContent}
+            </Box>
+          ) : (
+            <Drawer
+              open={openNav}
+              onClose={onCloseNav}
+              PaperProps={{
+                sx: {
+                  width: NAV.WIDTH,
+                },
+              }}
+            >
+              {renderContent}
+            </Drawer>
+          )}
         </Box>
-      ) : (
-        <Drawer
-          open={openNav}
-          onClose={onCloseNav}
-          PaperProps={{
-            sx: {
-              width: NAV.WIDTH,
-            },
-          }}
-        >
-          {renderContent}
-        </Drawer>
-      )}
-    </Box>
+      ) : null}
+    </>
   );
 }
 

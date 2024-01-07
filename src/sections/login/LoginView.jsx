@@ -34,7 +34,6 @@ export default function LoginView() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    console.log(user);
     if (user?.user?.user) {
       router.push('/', { replace: true });
     }
