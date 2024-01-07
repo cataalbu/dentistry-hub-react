@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const loginUser = createAsyncThunk('user/loginUser', async (data, thunkAPI) => {
-  const response = await fetch('http://localhost:1337/api/auth/local', {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_API_URL}/auth/local`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

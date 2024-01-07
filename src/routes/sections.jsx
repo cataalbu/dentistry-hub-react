@@ -2,12 +2,13 @@ import { lazy, Suspense } from 'react';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
 import DashboardLayout from 'src/layouts/dashboard';
+import TMJDTestDetailsPage from 'src/pages/TMJDTestDetails';
 
 export const IndexPage = lazy(() => import('src/pages/App'));
 export const BlogPage = lazy(() => import('src/pages/Blog'));
 export const UserPage = lazy(() => import('src/pages/User'));
 export const LoginPage = lazy(() => import('src/pages/Login'));
-export const ProductsPage = lazy(() => import('src/pages/Products'));
+export const ProductsPage = lazy(() => import('src/pages/TMJDTest'));
 export const Page404 = lazy(() => import('src/pages/PageNotFound'));
 
 // ----------------------------------------------------------------------
@@ -26,6 +27,7 @@ export default function Router() {
         { element: <IndexPage />, index: true },
         { path: 'patients', element: <UserPage /> },
         { path: 'tmpjd-tests', element: <ProductsPage /> },
+        { path: 'tmpjd-tests/:id', element: <TMJDTestDetailsPage /> },
       ],
     },
     {

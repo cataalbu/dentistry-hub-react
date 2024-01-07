@@ -1,17 +1,17 @@
-import { useEffect } from 'react';
-import { faker } from '@faker-js/faker';
+/* eslint-disable no-plusplus */
 import { useTheme } from '@emotion/react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
 
 import { getPatients } from 'src/redux/patient/patientSlice';
+import { getTmjdTests } from 'src/redux/tmjdTest/tmjdTestSlice';
+import { getMriImages } from 'src/redux/mriImage/mriImageSlice';
 
 import Iconify from 'src/components/iconify';
 
-import AppNewsUpdate from '../AppNewsUpdate';
 import AppCurrentVisits from '../AppCurrentVisits';
 import AppWidgetSummary from '../AppWidgetSummary';
 
@@ -19,22 +19,72 @@ import AppWidgetSummary from '../AppWidgetSummary';
 
 export default function AppView() {
   const theme = useTheme();
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPatients());
+    dispatch(getTmjdTests());
+    dispatch(getMriImages());
   }, [dispatch]);
+
+  const { patients } = useSelector((state) => state.patient);
+  const { tmjdTests } = useSelector((state) => state.tmjdTest);
+  const { mriImages } = useSelector((state) => state.mriImage);
+
+  const [chartData, setChartData] = useState([
+    { label: 'MDD', value: 0 },
+    { label: 'ADD', value: 0 },
+    { label: 'LDD', value: 0 },
+    { label: 'N', value: 0 },
+  ]);
+
+  useEffect(() => {
+    if (mriImages?.data) {
+      let mdd = 0;
+      let add = 0;
+      let ldd = 0;
+      let n = 0;
+      mriImages.data.forEach((mriImage) => {
+        switch (mriImage.attributes.result) {
+          case 'MDD':
+            mdd++;
+            break;
+          case 'ADD':
+            add++;
+            break;
+          case 'LDD':
+            ldd++;
+            break;
+          case 'N':
+            n++;
+            break;
+          default:
+            break;
+        }
+      });
+      setChartData([
+        { label: 'MDD', value: mdd },
+        { label: 'ADD', value: add },
+        { label: 'LDD', value: ldd },
+        { label: 'N', value: n },
+      ]);
+    } else {
+      setChartData([
+        { label: 'MDD', value: 0 },
+        { label: 'ADD', value: 0 },
+        { label: 'LDD', value: 0 },
+        { label: 'N', value: 0 },
+      ]);
+    }
+  }, [mriImages]);
 
   return (
     <Container maxWidth="xl">
-      <Typography variant="h4" sx={{ mb: 5 }}>
-        Hi, Welcome back 👋
-      </Typography>
-
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Clients"
-            total={123}
+            title="Patients"
+            total={patients?.data?.length}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
           />
@@ -43,7 +93,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Total tests"
-            total={123}
+            total={tmjdTests?.data?.length}
             color="warning"
             icon={
               <Iconify
@@ -55,7 +105,16 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={12} md={6} lg={4}>
+          <AppCurrentVisits
+            title="MRI Results"
+            chart={{
+              series: chartData,
+            }}
+          />
+        </Grid>
+
+        {/* <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Patients diagnosed"
             total={87}
@@ -64,9 +123,9 @@ export default function AppView() {
               <Iconify icon="mdi:patient" width="64px" sx={{ color: theme.palette.success.main }} />
             }
           />
-        </Grid>
+        </Grid> */}
 
-        <Grid xs={12} sm={6} md={3}>
+        {/* <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Failed tests"
             total={2}
@@ -75,34 +134,7 @@ export default function AppView() {
               <Iconify icon="ep:failed" width="64px" sx={{ color: theme.palette.error.main }} />
             }
           />
-        </Grid>
-
-        <Grid xs={12} md={6} lg={4}>
-          <AppCurrentVisits
-            title="Current results"
-            chart={{
-              series: [
-                { label: 'MDD', value: 40 },
-                { label: 'ADD', value: 27 },
-                { label: 'LDD', value: 20 },
-                { label: 'N', value: 36 },
-              ],
-            }}
-          />
-        </Grid>
-
-        <Grid xs={12} md={6} lg={8}>
-          <AppNewsUpdate
-            title="Recent tests"
-            list={[...Array(5)].map((_, index) => ({
-              id: faker.string.uuid(),
-              title: `${faker.person.firstName()} ${faker.person.lastName()}`,
-              description: 'TMJD detected',
-              image: `/assets/images/covers/cover_${index + 1}.jpg`,
-              postedAt: faker.date.recent(),
-            }))}
-          />
-        </Grid>
+        </Grid> */}
       </Grid>
     </Container>
   );

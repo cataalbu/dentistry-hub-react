@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getPatients = createAsyncThunk('patient/getPatients', async (data, thunkAPI) => {
   const state = thunkAPI.getState();
-  const response = await fetch('http://localhost:1337/api/patients', {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_API_URL}/patients`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ export const getPatients = createAsyncThunk('patient/getPatients', async (data, 
 
 export const createPatient = createAsyncThunk('patient/createPatient', async (data, thunkAPI) => {
   const state = thunkAPI.getState();
-  const response = await fetch('http://localhost:1337/api/patients', {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_API_URL}/patients`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export const createPatient = createAsyncThunk('patient/createPatient', async (da
 
 export const updatePatient = createAsyncThunk('patient/updatePatient', async (data, thunkAPI) => {
   const state = thunkAPI.getState();
-  const response = await fetch(`http://localhost:1337/api/patients/${data.id}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_API_URL}/patients/${data.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
