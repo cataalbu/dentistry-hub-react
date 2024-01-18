@@ -15,6 +15,8 @@ import {
   FormControl,
 } from '@mui/material';
 
+import getPrescurtation from 'src/utils/prescurtation';
+
 export default function TMJDTestDetailsView() {
   const [tmjdTest, setTmjdTest] = useState(null);
   const [reportProblemOpen, setReportProblemOpen] = useState(false);
@@ -67,7 +69,7 @@ export default function TMJDTestDetailsView() {
 
   return (
     <Container>
-      <h1>TMJD Test Details</h1>
+      <h1>Temporomandibular Disorder Test Details</h1>
       {tmjdTest ? (
         <Stack>
           <Typography variant="h4">#{tmjdTest.id}</Typography>
@@ -88,7 +90,9 @@ export default function TMJDTestDetailsView() {
               marginTop: 32,
             }}
           >
-            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>CL Image</Typography>
+            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>
+              Coronal left Image (CL)
+            </Typography>
             <Box
               style={{
                 display: 'flex',
@@ -114,7 +118,7 @@ export default function TMJDTestDetailsView() {
                     Result:
                   </span>
                   <span style={{ marginLeft: 32 }}>
-                    {tmjdTest.attributes.cl_image.data.attributes.result}
+                    {getPrescurtation(tmjdTest.attributes.cl_image.data.attributes.result)}
                   </span>
                 </Typography>
 
@@ -128,7 +132,9 @@ export default function TMJDTestDetailsView() {
                       Reported result:
                     </span>
                     <span style={{ marginLeft: 32 }}>
-                      {tmjdTest.attributes.cl_image.data.attributes.reportedProblemSolution}
+                      {getPrescurtation(
+                        tmjdTest.attributes.cl_image.data.attributes.reportedProblemSolution
+                      )}
                     </span>
                   </Typography>
                 ) : null}
@@ -155,7 +161,9 @@ export default function TMJDTestDetailsView() {
               marginTop: 32,
             }}
           >
-            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>CR Image</Typography>
+            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>
+              Coronal right Image (CR)
+            </Typography>
             <Box
               style={{
                 display: 'flex',
@@ -181,7 +189,7 @@ export default function TMJDTestDetailsView() {
                     Result:
                   </span>
                   <span style={{ marginLeft: 32 }}>
-                    {tmjdTest.attributes.cr_image.data.attributes.result}
+                    {getPrescurtation(tmjdTest.attributes.cr_image.data.attributes.result)}
                   </span>
                 </Typography>
 
@@ -195,7 +203,9 @@ export default function TMJDTestDetailsView() {
                       Reported result:
                     </span>
                     <span style={{ marginLeft: 32 }}>
-                      {tmjdTest.attributes.cr_image.data.attributes.reportedProblemSolution}
+                      {getPrescurtation(
+                        tmjdTest.attributes.cr_image.data.attributes.reportedProblemSolution
+                      )}
                     </span>
                   </Typography>
                 ) : null}
@@ -222,7 +232,9 @@ export default function TMJDTestDetailsView() {
               marginTop: 32,
             }}
           >
-            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>SCL Image</Typography>
+            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>
+              Sagital Mouth Closed left Image (SCL)
+            </Typography>
             <Box
               style={{
                 display: 'flex',
@@ -248,7 +260,7 @@ export default function TMJDTestDetailsView() {
                     Result:
                   </span>
                   <span style={{ marginLeft: 32 }}>
-                    {tmjdTest.attributes.scl_image.data.attributes.result}
+                    {getPrescurtation(tmjdTest.attributes.scl_image.data.attributes.result)}
                   </span>
                 </Typography>
 
@@ -262,7 +274,9 @@ export default function TMJDTestDetailsView() {
                       Reported result:
                     </span>
                     <span style={{ marginLeft: 32 }}>
-                      {tmjdTest.attributes.scl_image.data.attributes.reportedProblemSolution}
+                      {getPrescurtation(
+                        tmjdTest.attributes.scl_image.data.attributes.reportedProblemSolution
+                      )}
                     </span>
                   </Typography>
                 ) : null}
@@ -289,7 +303,9 @@ export default function TMJDTestDetailsView() {
               marginTop: 32,
             }}
           >
-            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>SCR Image</Typography>
+            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>
+              Sagital Mouth Closed right Image (SCR)
+            </Typography>
             <Box
               style={{
                 display: 'flex',
@@ -315,7 +331,7 @@ export default function TMJDTestDetailsView() {
                     Result:
                   </span>
                   <span style={{ marginLeft: 32 }}>
-                    {tmjdTest.attributes.scr_image.data.attributes.result}
+                    {getPrescurtation(tmjdTest.attributes.scr_image.data.attributes.result)}
                   </span>
                 </Typography>
 
@@ -329,7 +345,9 @@ export default function TMJDTestDetailsView() {
                       Reported result:
                     </span>
                     <span style={{ marginLeft: 32 }}>
-                      {tmjdTest.attributes.scr_image.data.attributes.reportedProblemSolution}
+                      {getPrescurtation(
+                        tmjdTest.attributes.scr_image.data.attributes.reportedProblemSolution
+                      )}
                     </span>
                   </Typography>
                 ) : null}
@@ -356,7 +374,9 @@ export default function TMJDTestDetailsView() {
               marginTop: 32,
             }}
           >
-            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>SOL Image</Typography>
+            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>
+              Sagital Mouth Open left Image (SOL)
+            </Typography>
             <Box
               style={{
                 display: 'flex',
@@ -382,7 +402,7 @@ export default function TMJDTestDetailsView() {
                     Result:
                   </span>
                   <span style={{ marginLeft: 32 }}>
-                    {tmjdTest.attributes.sol_image.data.attributes.result}
+                    {getPrescurtation(tmjdTest.attributes.sol_image.data.attributes.result)}
                   </span>
                 </Typography>
 
@@ -396,7 +416,9 @@ export default function TMJDTestDetailsView() {
                       Reported result:
                     </span>
                     <span style={{ marginLeft: 32 }}>
-                      {tmjdTest.attributes.sol_image.data.attributes.reportedProblemSolution}
+                      {getPrescurtation(
+                        tmjdTest.attributes.sol_image.data.attributes.reportedProblemSolution
+                      )}
                     </span>
                   </Typography>
                 ) : null}
@@ -423,7 +445,9 @@ export default function TMJDTestDetailsView() {
               marginTop: 32,
             }}
           >
-            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>SOR Image</Typography>
+            <Typography style={{ fontSize: 22, fontWeight: 'bold' }}>
+              Sagital Mouth Open right Image (SOR)
+            </Typography>
             <Box
               style={{
                 display: 'flex',
@@ -449,7 +473,7 @@ export default function TMJDTestDetailsView() {
                     Result:
                   </span>
                   <span style={{ marginLeft: 32 }}>
-                    {tmjdTest.attributes.sor_image.data.attributes.result}
+                    {getPrescurtation(tmjdTest.attributes.sor_image.data.attributes.result)}
                   </span>
                 </Typography>
 
@@ -463,7 +487,9 @@ export default function TMJDTestDetailsView() {
                       Reported result:
                     </span>
                     <span style={{ marginLeft: 32 }}>
-                      {tmjdTest.attributes.sor_image.data.attributes.reportedProblemSolution}
+                      {getPrescurtation(
+                        tmjdTest.attributes.sor_image.data.attributes.reportedProblemSolution
+                      )}
                     </span>
                   </Typography>
                 ) : null}
@@ -528,10 +554,10 @@ export default function TMJDTestDetailsView() {
                   id="select-label"
                   fullWidth
                 >
-                  <MenuItem value="N">N</MenuItem>
-                  <MenuItem value="LDD">LDD</MenuItem>
-                  <MenuItem value="ADD">ADD</MenuItem>
-                  <MenuItem value="MDD">MDD</MenuItem>
+                  <MenuItem value="N">{getPrescurtation('N')}</MenuItem>
+                  <MenuItem value="LDD">{getPrescurtation('LDD')}</MenuItem>
+                  <MenuItem value="ADD">{getPrescurtation('ADD')}</MenuItem>
+                  <MenuItem value="MDD">{getPrescurtation('MDD')}</MenuItem>
                 </Select>
               </FormControl>
               <Button

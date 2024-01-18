@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 
+import getPrescurtation from 'src/utils/prescurtation';
+
 import { getPatients } from 'src/redux/patient/patientSlice';
 import { getTmjdTests } from 'src/redux/tmjdTest/tmjdTestSlice';
 import { getMriImages } from 'src/redux/mriImage/mriImageSlice';
@@ -32,10 +34,10 @@ export default function AppView() {
   const { mriImages } = useSelector((state) => state.mriImage);
 
   const [chartData, setChartData] = useState([
-    { label: 'MDD', value: 0 },
-    { label: 'ADD', value: 0 },
-    { label: 'LDD', value: 0 },
-    { label: 'N', value: 0 },
+    { label: getPrescurtation('MDD'), value: 0 },
+    { label: getPrescurtation('ADD'), value: 0 },
+    { label: getPrescurtation('LDD'), value: 0 },
+    { label: getPrescurtation('N'), value: 0 },
   ]);
 
   useEffect(() => {
@@ -63,17 +65,17 @@ export default function AppView() {
         }
       });
       setChartData([
-        { label: 'MDD', value: mdd },
-        { label: 'ADD', value: add },
-        { label: 'LDD', value: ldd },
-        { label: 'N', value: n },
+        { label: getPrescurtation('MDD'), value: mdd },
+        { label: getPrescurtation('ADD'), value: add },
+        { label: getPrescurtation('LDD'), value: ldd },
+        { label: getPrescurtation('N'), value: n },
       ]);
     } else {
       setChartData([
-        { label: 'MDD', value: 0 },
-        { label: 'ADD', value: 0 },
-        { label: 'LDD', value: 0 },
-        { label: 'N', value: 0 },
+        { label: getPrescurtation('MDD'), value: 0 },
+        { label: getPrescurtation('ADD'), value: 0 },
+        { label: getPrescurtation('LDD'), value: 0 },
+        { label: getPrescurtation('N'), value: 0 },
       ]);
     }
   }, [mriImages]);

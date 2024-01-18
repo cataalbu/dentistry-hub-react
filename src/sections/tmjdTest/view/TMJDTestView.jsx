@@ -183,7 +183,7 @@ export default function TMJDTestView() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">TMPJD Tests</Typography>
+        <Typography variant="h4">Temporomandibular Disorder Tests</Typography>
 
         <Button
           variant="contained"
@@ -215,8 +215,8 @@ export default function TMJDTestView() {
                   headLabel={[
                     { id: 'id', label: 'Id' },
                     { id: 'patientName', label: 'Patient name' },
-                    { id: 'result', label: 'Result' },
-                    { id: 'details' },
+                    { id: 'result', label: '' },
+                    { id: 'details', label: 'Details' },
                     { id: '' },
                   ]}
                 />
@@ -309,7 +309,7 @@ export default function TMJDTestView() {
                 }}
               >
                 <Typography id="patient-select-label" sx={{ mt: 2 }}>
-                  CL image
+                  Coronal left Image (CL)
                 </Typography>
                 {!clImage ? (
                   <Button component="label" variant="contained" startIcon={<CloudUpload />}>
@@ -339,7 +339,7 @@ export default function TMJDTestView() {
                 }}
               >
                 <Typography id="patient-select-label" sx={{ mt: 2 }}>
-                  CR image
+                  Coronal right Image (CR)
                 </Typography>
                 {!crImage ? (
                   <Button component="label" variant="contained" startIcon={<CloudUpload />}>
@@ -369,7 +369,7 @@ export default function TMJDTestView() {
                 }}
               >
                 <Typography id="patient-select-label" sx={{ mt: 2 }}>
-                  SCL image
+                  Sagital Mouth Closed left Image (SCL)
                 </Typography>
                 {!sclImage ? (
                   <Button component="label" variant="contained" startIcon={<CloudUpload />}>
@@ -399,7 +399,7 @@ export default function TMJDTestView() {
                 }}
               >
                 <Typography id="patient-select-label" sx={{ mt: 2 }}>
-                  SCR image
+                  Sagital Mouth Closed right Image (SCR)
                 </Typography>
                 {!scrImage ? (
                   <Button component="label" variant="contained" startIcon={<CloudUpload />}>
@@ -429,7 +429,7 @@ export default function TMJDTestView() {
                 }}
               >
                 <Typography id="patient-select-label" sx={{ mt: 2 }}>
-                  SOL image
+                  Sagital Mouth Open left Image (SOL)
                 </Typography>
                 {!solImage ? (
                   <Button component="label" variant="contained" startIcon={<CloudUpload />}>
@@ -459,7 +459,7 @@ export default function TMJDTestView() {
                 }}
               >
                 <Typography id="patient-select-label" sx={{ mt: 2 }}>
-                  SOR image
+                  Sagital Mouth Open right Image (SOR)
                 </Typography>
                 {!sorImage ? (
                   <Button component="label" variant="contained" startIcon={<CloudUpload />}>
