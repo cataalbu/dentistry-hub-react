@@ -40,8 +40,20 @@ export default function TMJDTestDetailsView() {
           data: { problemReported: true, reportedProblemSolution: solution },
         }),
       });
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_API_URL}/tmjd-tests/${id}?populate=deep`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.jwt}`,
+          },
+        }
+      );
+      const data = await res.json();
+      if (data.data) {
+        setTmjdTest(data.data);
+      }
     },
-    [user]
+    [user, id]
   );
 
   useEffect(() => {
